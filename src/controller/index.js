@@ -7,11 +7,24 @@ export class controller {
     const error = "Erro ao publicar livro"
     return modelMysql(res, sql, body, error)
   }
+  postWriter(req, res) {
+    const sql = "insert into writer set ?"
+    const body = req.body
+    const error = "Erro ao adicionar escritor"
+    return modelMysql(res, sql, body, error)
+  }
   updateBook(req, res) {
     const id = req.params.id
     const body = req.body
     const sql = `update bookshelf SET ? where id = ${id}`
     const error = 'Erro ao atualizar informações do livro'
+    modelMysql(res, sql, body, error)
+  }
+  updateWriter(req, res) {
+    const id = req.params.id
+    const body = req.body
+    const sql = `update writer SET ? where writerId = ${id}`
+    const error = 'Erro ao atualizar informações do escritor'
     modelMysql(res, sql, body, error)
   }
   getAllBooks(res) {
@@ -23,6 +36,17 @@ export class controller {
     const id = req.params.id
     const sql = `select * from bookshelf where id = ${id}`
     const error = `Erro ao consultar livro específico`
+    return modelMysql(res, sql, error)
+  }
+  getWriterById(req, res) {
+    const id = req.params.id
+    const sql = `select * from writer where writerId = ${id}`
+    const error = `Erro ao consultar escritor`
+    return modelMysql(res, sql, error)
+  }
+  getWriter(res) {
+    const sql = `select * from writer`
+    const error = `Erro ao consultar escritor`
     return modelMysql(res, sql, error)
   }
   getCategories(res) {
@@ -44,6 +68,12 @@ export class controller {
     const id = req.params.id
     const sql = `delete from bookshelf where id = ${id}`
     const error = `Erro ao deletar livro`
+    return modelMysql(res, sql, error)
+  }
+  deleteWriter(req, res) {
+    const id = req.params.id
+    const sql = `delete from writer where writerId = ${id}`
+    const error = `Erro ao deletar escritor`
     return modelMysql(res, sql, error)
   }
 }
