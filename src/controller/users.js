@@ -1,36 +1,39 @@
 import { modelMysql } from "../model/index.js";
 export class controllerUsers {
-  postUser(req, res) {
-    const body = req.body
-    const sql = `insert into users set ?`
-    const errorMessage = `Não foi possivel criar o usuário`
-    modelMysql(res, sql, body, errorMessage)
-  }
-  getUsers(res) {
-    const sql = `select * from users`
+
+  getUsers(sql, res) {
     const errorMessage = `não foi possivel criar tabela usuários`
     return modelMysql(res, sql, errorMessage)
 
   }
+  async postUser(req, res) {
+    const body = req.body
+    const email = req.body.email
+    const sql = `insert into users set ?`
+    const getEmails = `select * from users where email = '${email}'`
+    const repeatedUSer = await modelMysql(res, getEmails)
+    if (repeatedUSer.statusCode == 200) {
+      return
+    }
+    modelMysql(res, sql, body)
+  }
   getUserById(req, res) {
     const id = req.params.id
     const sql = `select * from users where idUser = ${id}`
-    const errorMessage = `Não foi possivel consultar usuário`
-    modelMysql(res, sql, errorMessage)
+
+    modelMysql(res, sql)
   }
   updateUser(req, res) {
     const body = req.body
     const id = req.params.id
     const sql = `update users set ? where idUser = ${id}`
-    const errorMessage = `Não foi possivel atualizar o usuário`
-    modelMysql(res, sql, body, errorMessage)
+    modelMysql(res, sql, body)
   }
   deleteUser(req, res) {
     const body = req.body
     const id = req.params.id
     const sql = `delete from users where idUser = ${id}`
-    const errorMessage = `Não foi possivel excluir o usuário`
-    modelMysql(res, sql, body, errorMessage)
+    modelMysql(res, sql, body)
   }
 
 }

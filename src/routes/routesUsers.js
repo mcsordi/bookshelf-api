@@ -7,7 +7,8 @@ routesUsers.post("/users", async (req, res) => {
   await userController.postUser(req, res)
 })
 routesUsers.get("/users", async (req, res) => {
-  await userController.getUsers(res)
+  const sql = `select * from users`
+  await userController.getUsers(sql, res)
 })
 routesUsers.get("/users/:id", async (req, res) => {
   await userController.getUserById(req, res)
