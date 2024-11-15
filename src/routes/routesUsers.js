@@ -13,7 +13,7 @@ routesUsers.get("/users", async (req, res) => {
 routesUsers.get("/users/:id", async (req, res) => {
   await userController.getUserById(req, res)
 })
-routesUsers.put("/users/:id", async (req, res) => {
+routesUsers.put("/users/:email", async (req, res) => {
   await userController.updateUser(req, res)
 })
 routesUsers.delete("/users/:id", async (req, res) => {

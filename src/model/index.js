@@ -15,7 +15,6 @@ export const modelMysql = async (res, sql, body = "") => {
     return res.status(200).json(result)
   } catch (error) {
     console.log("modelMysql ~ error:", error)
-
   }
 
 }

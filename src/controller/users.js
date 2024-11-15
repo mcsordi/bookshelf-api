@@ -25,8 +25,8 @@ export class controllerUsers {
   }
   updateUser(req, res) {
     const body = req.body
-    const id = req.params.id
-    const sql = `update users set ? where idUser = ${id}`
+    const email = req.params.email
+    const sql = `update users set ? where email = '${email}'`
     modelMysql(res, sql, body)
   }
   deleteUser(req, res) {
