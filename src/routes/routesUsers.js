@@ -13,6 +13,9 @@ routesUsers.get("/users", async (req, res) => {
 routesUsers.get("/users/:id", async (req, res) => {
   await userController.getUserById(req, res)
 })
+routesUsers.get("/user/:email", async (req, res) => {
+  await userController.getUserByEmail(req, res)
+})
 routesUsers.put("/users/:email", async (req, res) => {
   await userController.updateUser(req, res)
 })

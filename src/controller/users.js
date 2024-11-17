@@ -20,7 +20,11 @@ export class controllerUsers {
   getUserById(req, res) {
     const id = req.params.id
     const sql = `select * from users where idUser = ${id}`
-
+    modelMysql(res, sql)
+  }
+  getUserByEmail(req, res) {
+    const email = req.params.email
+    const sql = `select * from users where email = '${email}'`
     modelMysql(res, sql)
   }
   updateUser(req, res) {
